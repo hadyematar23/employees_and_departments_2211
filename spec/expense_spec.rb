@@ -1,6 +1,5 @@
 require './lib/employee'
 require './lib/department'
-require './lib/budget'
 require './lib/expense'
 
 describe Expense do

@@ -1,7 +1,6 @@
 require './lib/employee'
 require './lib/department'
 require './lib/expense'
-require './lib/budget'
 
 describe Department do
   context "Department happy paths" do 

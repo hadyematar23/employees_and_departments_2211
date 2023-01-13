@@ -1,5 +1,6 @@
 require './lib/employee'
 
+
 describe Employee do
   context "Employee happy paths" do 
     let(:bobbi) {Employee.new({
@@ -22,8 +23,6 @@ describe Employee do
       bobbi.give_raise(5000)
       expect(bobbi.salary).to eq(105000)
     end
-
-
 
   end 
 end
