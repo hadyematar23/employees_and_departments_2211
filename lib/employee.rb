@@ -8,4 +8,8 @@ class Employee
     @salary = info[:salary][1..-1].to_i
     
   end
+
+  def give_raise(raise_amount)
+    @salary = @salary +raise_amount
+  end
 end
