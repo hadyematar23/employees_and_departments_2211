@@ -1,5 +1,5 @@
 require './lib/employee'
-# require './lib/department'
+require './lib/department'
 
 describe Employee do
   context "Employee happy paths" do 
