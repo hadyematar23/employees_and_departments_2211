@@ -37,23 +37,23 @@ describe Budget do
   
 
     it "exists as a budget object" do 
-      expect(budget2020). to be_an_instance_of(Budget)
-      expect(budget2021). to be_an_instance_of(Budget)
+      expect(budget2020).to be_an_instance_of(Budget)
+      expect(budget2021).to be_an_instance_of(Budget)
 
     end
 
-    it "each budget has an attribute including the year it represents" do 
+    it "each budget has an attribute of the year it represents" do 
       expect(budget2020.year).to eq(2020)
       expect(budget2021.year).to eq(2021)
     end
 
-    it "starts out having no departments" do 
+    it "each budget out having no departments within it" do 
       expect(budget2020.departments).to eq([])
       expect(budget2021.departments).to eq([])
 
     end
 
-    it "can list the departments within its jurisdiction" do 
+    it "departments can be added to its jurisdiction and then listed by budget" do 
       
       budget2020.add_department(customer_service)
       budget2020.add_department(food)
@@ -151,7 +151,12 @@ describe Budget do
 
     end
 
-    it "if the employee composition within a department changes, so does the list of employees" do 
+    it "if the employee composition within a department changes, or the salary of employee changes, so does the list" do 
+      
+      hady = Employee.new({
+        name: "Hady Matar", 
+        age: "32", 
+        salary: "$800000"})
 
       covid_relief.hire(hady)
       recreation.hire(abraham)
@@ -159,12 +164,10 @@ describe Budget do
       budget2020.add_department(covid_relief)
       
       expect(budget2020.list_employee_salaries).to eq({
-        "Hady Matar" => "$80000", 
+        "Hady Matar" => "$800000", 
         "Abraham Matar" => "$12"
       })
 
     end
-
-
   end
 end 

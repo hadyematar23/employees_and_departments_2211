@@ -14,22 +14,28 @@ describe Department do
       salary: "90000"})}  
 
     it "exists as a Department object" do 
+      expect(customer_service).to be_an_instance_of(Department)
+    end
+
+    it "has a readable attribute of name" do 
       expect(customer_service.name).to eq("Customer Service")
     end
 
-    it "can have employees but starts out with none" do 
+    it "starts out with no employees" do 
 
       expect(customer_service.employees).to eq([])
     
     end  
 
-    it "checking bobbi's salary to be safe as input here does not incldue a $" do 
+    it "the employee's salary returns as an integer regardless of whether it has a $ prepending it or not" do 
       expect(bobbi.salary).to eq(100000)
+      expect(aaron.salary).to eq(90000)
     end
 
     it "the department can hire employees" do 
       customer_service.hire(bobbi)
       customer_service.hire(aaron)
+      
       expect(customer_service.employees).to match_array([bobbi, aaron])
     end
 
