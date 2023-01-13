@@ -2,7 +2,10 @@ require './lib/employee'
 
 describe Employee do
   context "Employee happy paths" do 
-    let(:bobbi) { Employee.new({name: "Bobbi Jaeger", age: "30", salary: "$100000"})}
+    let(:bobbi) {Employee.new({
+      name: "Bobbi Jaeger", 
+      age: "30", 
+      salary: "$100000"})}
 
     it "exists as an object of employee" do 
 
