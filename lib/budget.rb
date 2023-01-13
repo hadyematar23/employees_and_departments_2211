@@ -29,4 +29,16 @@ class Budget
   def salary_to_s(employee)
     (employee.salary.to_s).prepend("$")
   end
+
+  def total_charges_responsible(employee)
+    cost = 0
+    @departments.each do |department|
+      department.listed_expenses.each do |expense|
+        if expense.employee_charging == employee
+          cost += expense.cost_on_department
+        end
+      end
+    end
+  cost 
+  end 
 end

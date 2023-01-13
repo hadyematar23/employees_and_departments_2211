@@ -169,5 +169,26 @@ describe Budget do
       })
 
     end
+
+    it "can list the total charges for which an employee is responsible" do 
+
+      clean_up = Expense.new(abraham, 12)
+      cut_trees = Expense.new(abraham, 13)
+      mcdonalds = Expense.new(abraham, 10)
+      
+      covid_relief.hire(abraham)
+      recreation.hire(abraham)
+      
+      budget2020.add_department(recreation)
+      budget2020.add_department(covid_relief)
+      budget2020.add_department(food)
+
+      covid_relief.add_expense(clean_up)
+      recreation.add_expense(cut_trees)
+      food.add_expense(mcdonalds)
+
+      expect(budget2020.total_charges_responsible(abraham)).to eq(25)
+
+    end
   end
 end 

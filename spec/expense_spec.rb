@@ -1,7 +1,7 @@
 require './lib/employee'
 require './lib/department'
 require './lib/budget'
-reqiore './lib/expense'
+require './lib/expense'
 
 describe Expense do
   context "Expense happy paths" do 
@@ -21,7 +21,7 @@ describe Expense do
     end
 
     it "has attributes such as who is responsible and the cost of the expense on the department" do 
-      expect(clean_up.employee_responsible).to eq(abraham)
+      expect(clean_up.employee_charging).to eq(abraham)
       expect(clean_up.cost_on_department).to eq(12)
 
     end
