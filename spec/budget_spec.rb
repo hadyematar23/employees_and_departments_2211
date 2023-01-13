@@ -14,6 +14,27 @@ describe Budget do
     let(:sanitation){Department.new("Sanitation")}
     let(:law_enforcement){Department.new("Law Enforcement")}
     let(:covid_recovery){Department.new("Covid Recovery")}
+    let(:hady){Employee.new({
+      name: "Hady Matar", 
+      age: "32", 
+      salary: "$80000"})}
+    let(:malena){Employee.new({
+      name: "Maria Magdelna", 
+      age: "26", 
+      salary: "$90000"})}
+    let(:diego){Employee.new({
+      name: "Diego Colive", 
+      age: "34", 
+      salary: "$60000"})}
+    let(:michele){Employee.new({
+      name: "Michele", 
+      age: "33", 
+      salary: "$100000"})}
+    let(:abraham){Employee.new({
+      name: "Abraham Matar", 
+      age: "38", 
+      salary: "$12"})}
+  
 
     it "exists as a budget object" do 
       expect(budget2020). to be_an_instance_of(Budget)
@@ -67,7 +88,7 @@ describe Budget do
       health.expense(800)
       sanitation.expense(600)
       law_enforcement.expense(200)
-      law_enfocement.expense(100)
+      law_enforcement.expense(100)
       covid_recovery.expense(700)
 
       budget2021.add_department(health)
@@ -75,10 +96,72 @@ describe Budget do
       budget2021.add_department(law_enforcement)
       budget2021.add_department(covid_recovery)
 
-
       expect(budget2020.cheap_departments).to match_array([recreation, customer_service])
 
       expect(budget2021.cheap_departments).to match_array([law_enforcement])
+
+    end
+
+    it "if the budget expenses change, the list of cheap departments also changes" do 
+
+      customer_service.expense(300)
+      customer_service.expense(500)
+      food.expense(400)
+      recreation.expense(500)
+      covid_relief.expense(400)
+      covid_relief.expense(300)
+
+      budget2020.add_department(customer_service)
+      budget2020.add_department(food)
+      budget2020.add_department(recreation)
+      budget2020.add_department(covid_relief)
+
+      health.expense(300)
+      sanitation.expense(400)
+      law_enforcement.expense(800)
+      law_enforcement.expense(100)
+      covid_recovery.expense(100)
+
+      budget2021.add_department(health)
+      budget2021.add_department(sanitation)
+      budget2021.add_department(law_enforcement)
+      budget2021.add_department(covid_recovery)
+
+      expect(budget2020.cheap_departments).to match_array([food])
+
+      expect(budget2021.cheap_departments).to match_array([health, sanitation, covid_recovery])
+
+    end
+
+    it "a budget can list all of the employees' salaries" do 
+
+      recreation.hire(hady)
+      recreation.hire(malena)
+      covid_relief.hire(diego)
+      covid_relief.hire(michele)
+      budget2020.add_department(recreation)
+      budget2020.add_department(covid_relief)
+      
+      expect(budget2020.list_employee_salaries).to eq({
+        "Hady Matar" => "$80000", 
+        "Maria Magdelna" => "$90000",
+        "Diego Colive" => "$60000",
+        "Michele" => "$100000"
+      })
+
+    end
+
+    it "if the employee composition within a department changes, so does the list of employees" do 
+
+      covid_relief.hire(hady)
+      recreation.hire(abraham)
+      budget2020.add_department(recreation)
+      budget2020.add_department(covid_relief)
+      
+      expect(budget2020.list_employee_salaries).to eq({
+        "Hady Matar" => "$80000", 
+        "Abraham Matar" => "$12"
+      })
 
     end
 
